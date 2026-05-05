@@ -4,5 +4,8 @@
     "baseUrl": ".",
     "jsx": "preserve",
     "jsxImportSource": "solid-js"
-  }
+  },
+  "include": [
+    "./worker-configuration.d.ts"
+  ]
 }

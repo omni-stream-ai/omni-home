@@ -8,10 +8,13 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
-    "check": "astro check"
+    "preview": "bun run build && wrangler dev",
+    "check": "astro check",
+    "generate-types": "wrangler types",
+    "deploy": "bun run build && wrangler deploy"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^13.3.1",
     "@astrojs/solid-js": "^6.0.1",
     "@fontsource-variable/manrope": "^5.2.8",
     "@fontsource/cormorant-garamond": "^5.2.11",
@@ -20,6 +23,10 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "wrangler": "^4.87.0"
+  },
+  "overrides": {
+    "vite": "^7"
   }
 }
