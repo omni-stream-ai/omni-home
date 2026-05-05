@@ -1,0 +1,125 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import type { TopicPage } from "../content/seo";
+
+type Props = {
+  page: TopicPage;
+};
+
+const { page } = Astro.props;
+
+const softwareJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Omni Code",
+  applicationCategory: "DeveloperApplication",
+  operatingSystem: "Android, iOS, macOS, Windows, Linux",
+  url: "https://omnistreamai.com",
+  description: page.description,
+  sameAs: [
+    "https://github.com/omni-stream-ai/omni-code",
+    "https://github.com/omni-stream-ai/omni-code-bridge"
+  ],
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD"
+  }
+};
+---
+
+<BaseLayout title={page.title} description={page.description} jsonLd={softwareJsonLd}>
+  <main class="site-shell">
+    <section class="hero topic-hero">
+      <div class="hero-orb hero-orb-one" aria-hidden="true"></div>
+      <div class="hero-orb hero-orb-two" aria-hidden="true"></div>
+      <div class="hero-gridline" aria-hidden="true"></div>
+
+      <header class="topbar">
+        <a class="brand" href="/">
+          <span class="brand-mark">
+            <img src="/omni-code-logo.svg" alt="Omni Code logo" />
+          </span>
+          <span class="brand-copy">
+            <strong>Omni Code</strong>
+            <small>omnistreamai.com</small>
+          </span>
+        </a>
+
+        <nav class="topnav" aria-label="Primary">
+          <a href="/">Home</a>
+          <a href="/voice">Voice</a>
+          <a href="/ai-approval">AI Approval</a>
+          <a href="/bridge">Bridge</a>
+          <a href="/download">Download</a>
+        </nav>
+      </header>
+
+      <div class="topic-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">{page.eyebrow}</p>
+          <h1>{page.headline}</h1>
+          <p class="hero-lead">{page.intro}</p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href={page.ctaHref} target="_blank" rel="noreferrer">
+              {page.ctaLabel}
+            </a>
+            <a class="button button-secondary" href="/">
+              Back to homepage
+            </a>
+          </div>
+        </div>
+
+        <aside class="topic-panel">
+          <p class="mini-label">Also explore</p>
+          <ul class="topic-links">
+            <li><a href="/voice">Voice-first interaction</a></li>
+            <li><a href="/ai-approval">AI-assisted approval</a></li>
+            <li><a href="/bridge">Self-hosted bridge</a></li>
+            <li><a href="/download">Downloads and releases</a></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Overview</p>
+        <h2>{page.eyebrow} for Omni Code</h2>
+        <p>{page.description}</p>
+      </div>
+
+      <div class="feature-grid">
+        {
+          page.points.map((point) => (
+            <article class="feature-card">
+              <p class="feature-accent">{page.eyebrow}</p>
+              <h3>{point.title}</h3>
+              <p>{point.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section section-cta">
+      <div class="cta-card">
+        <p class="eyebrow">Next step</p>
+        <h2>Use the client, the bridge, and the workflow together.</h2>
+        <p>
+          Omni Code works best when the desktop agent already runs locally and you want a better
+          remote surface for approval, replies, and voice interaction.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="https://github.com/omni-stream-ai/omni-code" target="_blank" rel="noreferrer">
+            Client repository
+          </a>
+          <a class="button button-secondary" href="https://github.com/omni-stream-ai/omni-code-bridge" target="_blank" rel="noreferrer">
+            Bridge repository
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

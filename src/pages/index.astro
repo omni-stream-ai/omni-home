@@ -1,0 +1,336 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import WorkflowBoard from "../components/WorkflowBoard";
+import FaqAccordion from "../components/FaqAccordion";
+import { faq, features, stats, workflow } from "../content/site";
+
+const title = "Omni Code | Remote Control for Desktop Coding Agents";
+const description =
+  "Omni Code is the official cross-platform client for managing desktop agent sessions, approvals, and replies through a self-hosted bridge.";
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="site-shell">
+    <section class="hero">
+      <div class="hero-orb hero-orb-one" aria-hidden="true"></div>
+      <div class="hero-orb hero-orb-two" aria-hidden="true"></div>
+      <div class="hero-gridline" aria-hidden="true"></div>
+      <header class="topbar">
+        <a class="brand" href="/">
+          <span class="brand-mark">
+            <img src="/omni-code-logo.svg" alt="Omni Code logo" />
+          </span>
+          <span class="brand-copy">
+            <strong>Omni Code</strong>
+            <small>omnistreamai.com</small>
+          </span>
+        </a>
+
+        <nav class="topnav" aria-label="Primary">
+          <a href="#product">Product</a>
+          <a href="/voice">Voice</a>
+          <a href="/ai-approval">AI Approval</a>
+          <a href="/bridge">Bridge</a>
+          <a href="#workflow">Workflow</a>
+          <a href="/download">Download</a>
+        </nav>
+      </header>
+
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Remote control for local coding agents</p>
+          <div class="hero-pill-row">
+            <span class="hero-pill">Cross-device control</span>
+            <span class="hero-pill">AI-assisted approval</span>
+            <span class="hero-pill">Full voice loop</span>
+            <span class="hero-pill">Self-hosted bridge</span>
+          </div>
+          <h1>Keep coding agents moving off-terminal.</h1>
+          <p class="hero-lead">
+            Omni Code is the cross-platform client for desktop agent sessions. Review approvals,
+            talk to the agent by voice, hear replies back, and keep the work attached to your
+            own bridge.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://github.com/omni-stream-ai/omni-code" target="_blank" rel="noreferrer">
+              Explore the client
+            </a>
+            <a class="button button-secondary" href="/voice">
+              Explore voice workflow
+            </a>
+          </div>
+
+          <p class="hero-note">
+            Flutter client. HTTP + SSE bridge. Voice-first. Self-hosted by default.
+          </p>
+        </div>
+
+        <div class="hero-stage" aria-label="Session preview">
+          <div class="status-rail">
+            <article class="status-card">
+              <span class="status-label">Bridge Status</span>
+              <strong>Connected to local workstation</strong>
+              <p>Low-latency sync over HTTP + SSE with session state and approval events in real time.</p>
+            </article>
+            <article class="status-card status-card-accent">
+              <span class="status-label">AI Approval</span>
+              <strong>Low-risk actions can auto-clear first</strong>
+              <p>High-risk commands still escalate to explicit approval on your phone or desktop.</p>
+            </article>
+          </div>
+
+          <div class="hero-panel">
+            <div class="panel-chrome">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="panel-body">
+              <div class="panel-header">
+                <div class="panel-line">
+                  <span class="panel-tag">Active Session</span>
+                  <strong>payments-service / refactor settlements</strong>
+                </div>
+                <div class="signal-badge">
+                  <span class="signal-dot"></span>
+                  Awaiting approval
+                </div>
+              </div>
+
+              <div class="panel-stream">
+                <p><span>bridge</span> Session resumed over SSE</p>
+                <p><span>agent</span> Waiting for approval to run integration tests</p>
+                <p><span>client</span> Prompt delivered to mobile and desktop devices</p>
+                <p><span>you</span> Approve action and send follow-up context</p>
+              </div>
+
+              <div class="command-card">
+                <div class="command-head">
+                  <small>Voice + reply controls</small>
+                  <strong>Voice input, auto-play replies, and brief system-prompt summaries</strong>
+                </div>
+                <div class="command-actions">
+                  <button type="button" class="command-button command-button-primary">Voice input</button>
+                  <button type="button" class="command-button command-button-secondary">Auto-play reply</button>
+                  <button type="button" class="command-button command-button-ghost">Brief mode</button>
+                </div>
+              </div>
+
+              <div class="command-card">
+                <div class="command-head">
+                  <small>Approval payload</small>
+                  <strong>cargo test --package settlements --test reconciliation_flow</strong>
+                </div>
+                <div class="command-actions">
+                  <button type="button" class="command-button command-button-primary">Approve</button>
+                  <button type="button" class="command-button command-button-secondary">Request context</button>
+                  <button type="button" class="command-button command-button-ghost">Deny</button>
+                </div>
+              </div>
+
+              <div class="panel-footer">
+                <div>
+                  <small>Transport</small>
+                  <strong>HTTP + SSE</strong>
+                </div>
+                <div>
+                  <small>Voice loop</small>
+                  <strong>STT / TTS</strong>
+                </div>
+                <div>
+                  <small>Ownership</small>
+                  <strong>Your bridge</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stat-strip">
+      {
+        stats.map((item) => (
+          <article class="stat-card">
+            <span class="stat-index">0{stats.indexOf(item) + 1}</span>
+            <strong>{item.value}</strong>
+            <p>{item.label}</p>
+          </article>
+        ))
+      }
+    </section>
+
+    <section id="product" class="section section-product">
+      <div class="section-heading">
+        <p class="eyebrow">Why teams adopt it</p>
+        <h2>The control layer for local agent work.</h2>
+        <p>
+          Omni Code does not replace your editor or terminal. It makes the existing desktop
+          session easier to supervise across devices, with approvals, voice, and reply shaping
+          built into the loop.
+        </p>
+      </div>
+
+      <div class="seo-link-strip">
+        <a class="seo-link-card" href="/voice">
+          <span>Voice</span>
+          <strong>Full voice loop for desktop agents</strong>
+        </a>
+        <a class="seo-link-card" href="/ai-approval">
+          <span>AI Approval</span>
+          <strong>Low-risk auto-approval with manual fallback</strong>
+        </a>
+        <a class="seo-link-card" href="/bridge">
+          <span>Bridge</span>
+          <strong>Self-hosted transport over HTTP and SSE</strong>
+        </a>
+        <a class="seo-link-card" href="/download">
+          <span>Download</span>
+          <strong>Client releases and self-hosted update paths</strong>
+        </a>
+      </div>
+
+      <div class="feature-grid">
+        {
+          features.map((feature) => (
+            <article class="feature-card">
+              <p class="feature-accent">{feature.accent}</p>
+              <h3>{feature.title}</h3>
+              <p>{feature.body}</p>
+              <span class="feature-arrow">Monitor the loop</span>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section section-architecture">
+      <div class="section-heading">
+        <p class="eyebrow">Operating model</p>
+        <h2>Mobility without giving up local control.</h2>
+      </div>
+
+      <div class="architecture-grid">
+        <article class="architecture-card architecture-card-strong">
+          <p class="mini-label">Core idea</p>
+          <h3>Your machine keeps the real coding context.</h3>
+          <p>
+            The bridge stays close to the desktop workflow, while the client becomes the remote
+            surface for sessions, messages, approvals, and notifications.
+          </p>
+        </article>
+
+        <article class="architecture-card">
+          <p class="mini-label">Transport</p>
+          <h3>HTTP for commands. SSE for live updates.</h3>
+          <p>
+            The setup is simple enough to self-host and explicit enough to reason about in team
+            environments.
+          </p>
+        </article>
+
+        <article class="architecture-card">
+          <p class="mini-label">Security posture</p>
+          <h3>Tokens and client IDs are configurable.</h3>
+          <p>
+            Bridge URL, token, and allowed client IDs can be matched to the environment you
+            actually run.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="workflow" class="section section-workflow">
+      <div class="section-heading">
+        <p class="eyebrow">Workflow</p>
+        <h2>One loop from terminal to remote control.</h2>
+        <p>
+          The product is strongest when the coding agent already runs on a desktop machine and
+          needs a reliable remote surface for supervision.
+        </p>
+      </div>
+
+      <WorkflowBoard steps={workflow} client:load />
+    </section>
+
+    <section class="section section-compare">
+      <div class="section-heading">
+        <p class="eyebrow">Current scope</p>
+        <h2>What Omni Code optimizes for.</h2>
+      </div>
+
+      <div class="compare-table" role="table" aria-label="Product scope">
+        <div class="compare-row compare-head" role="row">
+          <span role="columnheader">Area</span>
+          <span role="columnheader">What Omni Code emphasizes</span>
+        </div>
+        <div class="compare-row" role="row">
+          <span role="cell">Session access</span>
+          <span role="cell">Continue or inspect desktop agent sessions from mobile or desktop clients.</span>
+        </div>
+        <div class="compare-row" role="row">
+          <span role="cell">Human review</span>
+          <span role="cell">Approval prompts can stop sensitive actions and wait for an explicit answer.</span>
+        </div>
+        <div class="compare-row" role="row">
+          <span role="cell">AI approval</span>
+          <span role="cell">Low-risk requests can use AI-assisted approval before falling back to a person.</span>
+        </div>
+        <div class="compare-row" role="row">
+          <span role="cell">Voice loop</span>
+          <span role="cell">Speech input, auto-play replies, and text-to-speech reduce terminal babysitting.</span>
+        </div>
+        <div class="compare-row" role="row">
+          <span role="cell">Infrastructure</span>
+          <span role="cell">Bridge-based, configurable, and friendly to self-hosted setups instead of a fixed SaaS backend.</span>
+        </div>
+        <div class="compare-row" role="row">
+          <span role="cell">Reply shaping</span>
+          <span role="cell">Brief-reply mode can ask the AI to compress what it did into a much shorter summary.</span>
+        </div>
+        <div class="compare-row" role="row">
+          <span role="cell">Distribution</span>
+          <span role="cell">Android updates can come from GitHub releases or a self-hosted bridge manifest.</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section section-faq">
+      <div class="section-heading">
+        <p class="eyebrow">FAQ</p>
+        <h2>What to know before daily use.</h2>
+      </div>
+
+      <FaqAccordion items={faq} client:load />
+    </section>
+
+    <section class="section section-cta">
+      <div class="cta-card">
+        <p class="eyebrow">Ship the official workflow</p>
+        <h2>Use Omni Code when the missing piece is reach.</h2>
+        <p>
+          Start with the client repository, connect it to the bridge, and turn local coding
+          sessions into something you can supervise, hear, and approve from anywhere.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="https://github.com/omni-stream-ai/omni-code" target="_blank" rel="noreferrer">
+            Open GitHub
+          </a>
+          <a class="button button-secondary" href="/download">
+            Download and release info
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Omni Code is the official client site for omnistreamai.com.</p>
+      <div class="footer-links">
+        <a href="https://github.com/omni-stream-ai/omni-code" target="_blank" rel="noreferrer">Client</a>
+        <a href="https://github.com/omni-stream-ai/omni-code-bridge" target="_blank" rel="noreferrer">Bridge</a>
+        <a href="https://github.com/omni-stream-ai/omni-code/releases" target="_blank" rel="noreferrer">Releases</a>
+      </div>
+    </footer>
+  </main>
+</BaseLayout>
