@@ -121,6 +121,26 @@ The site currently reuses Omni Code app branding:
 
 These were copied from the `omni-code` project so the website and client branding stay aligned.
 
+## Font licensing
+
+The site currently self-hosts these fonts through Fontsource:
+
+- `Manrope` via `@fontsource-variable/manrope`
+- `Cormorant Garamond` via `@fontsource/cormorant-garamond`
+
+Both packages currently declare the `OFL-1.1` license (SIL Open Font License 1.1), which is generally suitable for commercial website use.
+
+Practical notes:
+
+- Keep the upstream license text when redistributing the font files
+- Do not sell the font files by themselves
+- If you modify and redistribute the fonts themselves, review the OFL reserved-name requirements first
+
+Relevant local files:
+
+- `node_modules/@fontsource-variable/manrope/LICENSE`
+- `node_modules/@fontsource/cormorant-garamond/LICENSE`
+
 ## SEO
 
 The site includes:
