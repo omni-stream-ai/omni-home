@@ -21,13 +21,20 @@ export default function FaqAccordion(props: FaqAccordionProps) {
                 type="button"
                 class="faq-trigger"
                 aria-expanded={isOpen()}
+                aria-controls={`faq-answer-${currentIndex()}`}
                 onClick={() => setOpenIndex(isOpen() ? -1 : currentIndex())}
               >
                 <span>{item.question}</span>
                 <span class="faq-symbol">{isOpen() ? "−" : "+"}</span>
               </button>
-              <div class="faq-answer" hidden={!isOpen()}>
-                <p>{item.answer}</p>
+              <div
+                id={`faq-answer-${currentIndex()}`}
+                classList={{ "faq-answer": true, "is-open": isOpen() }}
+                aria-hidden={!isOpen()}
+              >
+                <div class="faq-answer-inner">
+                  <p>{item.answer}</p>
+                </div>
               </div>
             </article>
           );

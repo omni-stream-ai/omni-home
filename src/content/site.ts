@@ -4,6 +4,19 @@ export type Feature = {
   accent: string;
 };
 
+export type ProductStory = {
+  eyebrow: string;
+  title: string;
+  body: string;
+  ctaLabel: string;
+  ctaHref: string;
+  visual: "voice" | "approval" | "bridge";
+  metricItems?: Array<{
+    label: string;
+    value: string;
+  }>;
+};
+
 export type WorkflowStep = {
   title: string;
   label: string;
@@ -20,52 +33,83 @@ export type FaqItem = {
 export const stats = [
   {
     value: "Voice-first",
-    label: "Speak to the agent, hear replies back, and stay in flow hands-free."
+    label: "Speech input, spoken replies, and TTS are built into the product loop."
   },
   {
     value: "AI approval",
-    label: "Low-risk actions can be assisted automatically before escalating to you."
+    label: "Low-risk approvals can be automated with manual fallback when needed."
+  },
+  {
+    value: "HTTP + SSE",
+    label: "Bridge transport stays explicit, simple, and self-hostable."
   },
   {
     value: "Brief replies",
-    label: "Use a session prompt mode that asks the AI to keep summaries short."
-  },
-  {
-    value: "Self-hosted",
-    label: "Bring your own bridge URL, token, and client identity."
+    label: "System-prompt compression can keep agent updates intentionally short."
   }
 ] as const;
 
 export const features: Feature[] = [
   {
-    title: "Keep the session alive away from the desk",
-    body: "Inspect projects, resume conversations, and keep agent work moving from mobile or desktop.",
-    accent: "Session Continuity"
+    title: "Resume the session away from the desk",
+    body: "Inspect projects, continue conversations, and keep local agent work moving from mobile or desktop.",
+    accent: "Remote Access"
   },
   {
-    title: "Use manual or AI-assisted approval",
-    body: "Sensitive actions can wait for you, while low-risk decisions can use AI-assisted approval with a configurable risk ceiling.",
-    accent: "Approval Control"
+    title: "Approve sensitive actions with AI help",
+    body: "Let low-risk steps use AI-assisted approval first, then step in when the command actually matters.",
+    accent: "Approval"
   },
   {
-    title: "Run the workflow as full voice interaction",
-    body: "Voice input, transcription, auto-play replies, and text-to-speech make the loop usable without staring at a terminal.",
-    accent: "Ergonomics"
+    title: "Run the loop by voice",
+    body: "Speech input, reply playback, and text-to-speech keep the workflow usable without staring at a terminal.",
+    accent: "Voice"
   },
   {
-    title: "Point the client at a bridge you control",
-    body: "Bridge URL, access token, and allowed client IDs are configurable for your laptop, LAN, or self-hosted setup.",
-    accent: "Bridge Ownership"
+    title: "Use a bridge you control",
+    body: "Point the client at your own bridge, token, and allowed clients instead of depending on a fixed SaaS backend.",
+    accent: "Bridge"
+  }
+];
+
+export const productStories: ProductStory[] = [
+  {
+    eyebrow: "Speak to the agent",
+    title: "Voice becomes part of the default workflow.",
+    body: "Speech input, reply playback, and text-to-speech keep the session usable away from the keyboard.",
+    ctaLabel: "Voice workflow",
+    ctaHref: "/products/omni-code/voice",
+    visual: "voice"
   },
   {
-    title: "Compress long AI replies on purpose",
-    body: "A brief-reply mode can inject a system-level instruction so new sessions ask the AI to summarize what it did in a much shorter form.",
-    accent: "Reply Shaping"
+    eyebrow: "Approve from anywhere",
+    title: "Manual review stays available when the command matters.",
+    body: "Let low-risk actions use AI-assisted approval first, then step in when the workflow needs a real yes or no.",
+    ctaLabel: "AI approval",
+    ctaHref: "/products/omni-code/ai-approval",
+    visual: "approval"
   },
   {
-    title: "Ship updates through auditable release paths",
-    body: "The client can read official GitHub releases or a bridge-served manifest when you want a fully self-hosted distribution path.",
-    accent: "Distribution"
+    eyebrow: "Run it on your own bridge",
+    title: "The transport stays simple enough to understand.",
+    body: "Bridge URL, tokens, allowed clients, HTTP commands, and SSE updates stay in a model you can inspect and self-host.",
+    ctaLabel: "Bridge model",
+    ctaHref: "/products/omni-code/bridge",
+    visual: "bridge",
+    metricItems: [
+      {
+        label: "Transport",
+        value: "HTTP + SSE"
+      },
+      {
+        label: "Mode",
+        value: "Self-hosted"
+      },
+      {
+        label: "Replies",
+        value: "Brief by prompt"
+      }
+    ]
   }
 ];
 
@@ -103,22 +147,22 @@ export const workflow: WorkflowStep[] = [
 export const faq: FaqItem[] = [
   {
     question: "Is Omni Code a hosted coding IDE?",
-    answer: "No. Omni Code is a client for desktop agent sessions. The core workflow assumes your coding environment stays on your own machine while the client connects through a bridge."
-  },
-  {
-    question: "What agent workflows is it designed for?",
-    answer: "The current positioning is Codex or similar command-line agent workflows that already run well on a desktop machine and need better remote supervision."
+    answer: "No. Omni Code is a client around desktop agent sessions that still run on your own machine."
   },
   {
     question: "How does the approval model work?",
     answer: "Sensitive bridge requests can fall back to explicit approval, and the client also supports AI-assisted approval with a configurable maximum risk level."
   },
   {
-    question: "Does it support voice-first use?",
+    question: "Does Omni Code support voice-first use?",
     answer: "Yes. The client supports voice input, speech transcription, text-to-speech playback, and automatic spoken replies after the AI finishes."
   },
   {
     question: "Can I make replies shorter?",
     answer: "Yes. A brief-reply mode can ask the AI to compress what it did into a much shorter summary for new sessions."
+  },
+  {
+    question: "Can I use my own bridge?",
+    answer: "Yes. Omni Code is designed around a bridge you can point at infrastructure you control."
   }
 ];
