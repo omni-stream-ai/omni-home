@@ -41,17 +41,17 @@ const softwareJsonLd = {
             <img src="/omni-code-logo.svg" alt="Omni Code logo" />
           </span>
           <span class="brand-copy">
-            <strong>Omni Code</strong>
+            <strong>Omni Stream AI</strong>
             <small>omnistreamai.com</small>
           </span>
         </a>
 
         <nav class="topnav" aria-label="Primary">
-          <a href="/">Home</a>
-          <a href="/voice">Voice</a>
-          <a href="/ai-approval">AI Approval</a>
-          <a href="/bridge">Bridge</a>
-          <a href="/download">Download</a>
+          <a class="is-active" href="/">Omni Code</a>
+          <span class="topnav-future" aria-label="More products planned">
+            More products
+            <span class="topnav-badge">Future</span>
+          </span>
         </nav>
       </header>
 
@@ -65,19 +65,24 @@ const softwareJsonLd = {
             <a class="button button-primary" href={page.ctaHref} target="_blank" rel="noreferrer">
               {page.ctaLabel}
             </a>
-            <a class="button button-secondary" href="/">
-              Back to homepage
+            <a class="button button-secondary" href="/products/omni-code/download">
+              Download Omni Code
             </a>
           </div>
         </div>
 
         <aside class="topic-panel">
+          <p class="mini-label">Omni Code</p>
+          <p class="topic-panel-title">{page.eyebrow}</p>
+          <p class="topic-panel-copy">
+            Remote supervision for desktop coding-agent sessions, with voice, approvals, and a bridge you control.
+          </p>
           <p class="mini-label">Also explore</p>
           <ul class="topic-links">
-            <li><a href="/voice">Voice-first interaction</a></li>
-            <li><a href="/ai-approval">AI-assisted approval</a></li>
-            <li><a href="/bridge">Self-hosted bridge</a></li>
-            <li><a href="/download">Downloads and releases</a></li>
+            <li><a href="/products/omni-code/voice">Voice-first interaction</a></li>
+            <li><a href="/products/omni-code/ai-approval">AI-assisted approval</a></li>
+            <li><a href="/products/omni-code/bridge">Self-hosted bridge</a></li>
+            <li><a href="/products/omni-code/download">Downloads and releases</a></li>
           </ul>
         </aside>
       </div>
@@ -86,7 +91,7 @@ const softwareJsonLd = {
     <section class="section">
       <div class="section-heading">
         <p class="eyebrow">Overview</p>
-        <h2>{page.eyebrow} for Omni Code</h2>
+        <h2>{page.eyebrow} in Omni Code.</h2>
         <p>{page.description}</p>
       </div>
 
@@ -106,17 +111,16 @@ const softwareJsonLd = {
     <section class="section section-cta">
       <div class="cta-card">
         <p class="eyebrow">Next step</p>
-        <h2>Use the client, the bridge, and the workflow together.</h2>
+        <h2>Use Omni Code from the product surface that matters most.</h2>
         <p>
-          Omni Code works best when the desktop agent already runs locally and you want a better
-          remote surface for approval, replies, and voice interaction.
+          Start from the client, download the latest build, or inspect the bridge when you want the control path closer to your own machine.
         </p>
         <div class="hero-actions">
           <a class="button button-primary" href="https://github.com/omni-stream-ai/omni-code" target="_blank" rel="noreferrer">
-            Client repository
+            Omni Code repo
           </a>
-          <a class="button button-secondary" href="https://github.com/omni-stream-ai/omni-code-bridge" target="_blank" rel="noreferrer">
-            Bridge repository
+          <a class="button button-secondary" href="/products/omni-code/download">
+            Download page
           </a>
         </div>
       </div>

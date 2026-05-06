@@ -1,0 +1,276 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+const title = "Download Omni Code | Omni Stream AI";
+const description =
+  "Download the latest Omni Code build for Android, macOS, Windows, or Linux from the current GitHub release.";
+
+const downloads = {
+  releases: "https://github.com/omni-stream-ai/omni-code/releases",
+  repo: "https://github.com/omni-stream-ai/omni-code",
+  bridge: "https://github.com/omni-stream-ai/omni-code-bridge",
+  manifest: "https://github.com/omni-stream-ai/omni-code/releases/latest/download/update.json",
+  android: "https://github.com/omni-stream-ai/omni-code/releases/latest/download/omni-code-android.apk",
+  macos: "https://github.com/omni-stream-ai/omni-code/releases/latest/download/omni-code-macos-unsigned.zip",
+  windows: "https://github.com/omni-stream-ai/omni-code/releases/latest/download/omni-code-windows-x86_64.zip",
+  linux: "https://github.com/omni-stream-ai/omni-code/releases/latest/download/omni-code-linux-x86_64.tar.gz"
+};
+
+const softwareJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Omni Code",
+  applicationCategory: "DeveloperApplication",
+  operatingSystem: "Android, macOS, Windows, Linux",
+  url: "https://omnistreamai.com/products/omni-code/download",
+  downloadUrl: downloads.releases,
+  description,
+  sameAs: [downloads.repo, downloads.bridge],
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD"
+  }
+};
+---
+
+<BaseLayout title={title} description={description} jsonLd={softwareJsonLd}>
+  <main class="site-shell">
+    <section class="hero topic-hero download-hero">
+      <div class="hero-orb hero-orb-one" aria-hidden="true"></div>
+      <div class="hero-orb hero-orb-two" aria-hidden="true"></div>
+      <div class="hero-gridline" aria-hidden="true"></div>
+
+      <header class="topbar">
+        <a class="brand" href="/">
+          <span class="brand-mark">
+            <img src="/omni-code-logo.svg" alt="Omni Code logo" />
+          </span>
+          <span class="brand-copy">
+            <strong>Omni Stream AI</strong>
+            <small>omnistreamai.com</small>
+          </span>
+        </a>
+
+        <nav class="topnav" aria-label="Primary">
+          <a class="is-active" href="/">Omni Code</a>
+          <span class="topnav-future" aria-label="More products planned">
+            More products
+            <span class="topnav-badge">Future</span>
+          </span>
+        </nav>
+      </header>
+
+      <div class="download-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Download Omni Code</p>
+          <div class="hero-pill-row">
+            <span class="hero-pill">Latest release</span>
+            <span class="hero-pill">Platform-aware</span>
+            <span class="hero-pill">GitHub-hosted</span>
+          </div>
+          <h1>Download the latest build for your platform.</h1>
+          <p class="hero-lead">
+            The main button can recommend the latest Android, macOS, Windows, or Linux build, while
+            keeping every platform link visible underneath.
+          </p>
+
+          <div class="hero-actions">
+            <a
+              id="download-cta"
+              class="button button-primary"
+              href={downloads.releases}
+              data-default-label="View latest releases"
+            >
+              View latest releases
+            </a>
+            <a class="button button-secondary" href={downloads.releases} target="_blank" rel="noreferrer">
+              Open releases
+            </a>
+          </div>
+
+          <p id="download-note" class="hero-note">
+            Platform detection happens in the browser. If it is unclear, the button falls back to the releases page.
+          </p>
+        </div>
+
+        <aside class="download-panel">
+          <div class="download-panel-head">
+            <p class="mini-label">Suggested target</p>
+            <div class="download-detected-row">
+              <strong id="download-platform-label">Release page</strong>
+              <span id="download-platform-chip" class="download-platform-chip">Fallback</span>
+            </div>
+            <p class="download-panel-copy">
+              These links follow the current GitHub latest release as long as the published asset names stay stable.
+            </p>
+          </div>
+
+          <div class="download-card-grid">
+            <a class="download-card" data-platform-card="android" href={downloads.android}>
+              <span>Android</span>
+              <strong>Universal APK</strong>
+              <small>Direct latest download</small>
+            </a>
+            <a class="download-card" data-platform-card="macos" href={downloads.macos}>
+              <span>macOS</span>
+              <strong>Unsigned ZIP</strong>
+              <small>May require Gatekeeper override</small>
+            </a>
+            <a class="download-card" data-platform-card="windows" href={downloads.windows}>
+              <span>Windows</span>
+              <strong>x86_64 ZIP</strong>
+              <small>Direct latest download</small>
+            </a>
+            <a class="download-card" data-platform-card="linux" href={downloads.linux}>
+              <span>Linux</span>
+              <strong>x86_64 tar.gz</strong>
+              <small>Direct latest download</small>
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Release paths</p>
+        <h2>One primary button, all platforms still visible.</h2>
+        <p>
+          The page can recommend a package automatically without hiding the full release list from
+          someone downloading for another machine.
+        </p>
+      </div>
+
+      <div class="feature-grid download-detail-grid">
+        <article class="feature-card">
+          <p class="feature-accent">Desktop</p>
+          <h3>Use GitHub latest-release asset links.</h3>
+          <p>
+            macOS, Windows, and Linux can point straight at fixed asset names under the current
+            latest GitHub release instead of hardcoding a version tag.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <p class="feature-accent">Android</p>
+          <h3>Keep the APK path straightforward.</h3>
+          <p>
+            The universal Android APK can use the same latest-release pattern, while the published
+            <code>update.json</code> manifest remains available for client update flows.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <p class="feature-accent">Fallback</p>
+          <h3>Always leave a manual route.</h3>
+          <p>
+            If platform detection is ambiguous or someone is downloading for another device, the
+            releases page remains one click away with every published artifact.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-cta">
+      <div class="cta-card download-cta-card">
+        <p class="eyebrow">More links</p>
+        <h2>Open the repos directly when you need more detail.</h2>
+        <p>
+          GitHub releases are the main distribution path today. The bridge repository and Android
+          update manifest stay linked here for inspection.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href={downloads.repo} target="_blank" rel="noreferrer">
+            Omni Code repo
+          </a>
+          <a class="button button-secondary" href={downloads.bridge} target="_blank" rel="noreferrer">
+            Bridge repo
+          </a>
+          <a class="button button-secondary" href={downloads.manifest} target="_blank" rel="noreferrer">
+            Android update manifest
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline define:vars={{ downloads }}>
+    const platformMap = {
+      android: {
+        label: "Android",
+        chip: "APK",
+        href: downloads.android,
+        cta: "Download for Android",
+        note: "Direct latest universal APK from GitHub releases."
+      },
+      macos: {
+        label: "macOS",
+        chip: "ZIP",
+        href: downloads.macos,
+        cta: "Download for macOS",
+        note: "Latest macOS unsigned ZIP from GitHub releases."
+      },
+      windows: {
+        label: "Windows",
+        chip: "ZIP",
+        href: downloads.windows,
+        cta: "Download for Windows",
+        note: "Latest Windows x86_64 ZIP from GitHub releases."
+      },
+      linux: {
+        label: "Linux",
+        chip: "tar.gz",
+        href: downloads.linux,
+        cta: "Download for Linux",
+        note: "Latest Linux x86_64 tarball from GitHub releases."
+      },
+      ios: {
+        label: "iPhone / iPad",
+        chip: "Soon",
+        href: downloads.releases,
+        cta: "View desktop releases",
+        note: "An iOS build is not listed right now, so the button falls back to the full releases page."
+      },
+      fallback: {
+        label: "Release page",
+        chip: "Fallback",
+        href: downloads.releases,
+        cta: "View latest releases",
+        note: "Platform detection is unavailable, so the button falls back to the latest releases page."
+      }
+    };
+
+    const detectPlatform = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const platform = (navigator.userAgentData?.platform || navigator.platform || "").toLowerCase();
+
+      if (userAgent.includes("android")) return "android";
+      if (/iphone|ipad|ipod/.test(userAgent)) return "ios";
+      if (platform.includes("mac") || userAgent.includes("mac os x")) return "macos";
+      if (platform.includes("win") || userAgent.includes("windows")) return "windows";
+      if (platform.includes("linux") || userAgent.includes("linux")) return "linux";
+      return "fallback";
+    };
+
+    const key = detectPlatform();
+    const target = platformMap[key] || platformMap.fallback;
+    const cta = document.getElementById("download-cta");
+    const note = document.getElementById("download-note");
+    const platformLabel = document.getElementById("download-platform-label");
+    const platformChip = document.getElementById("download-platform-chip");
+
+    if (cta instanceof HTMLAnchorElement) {
+      cta.href = target.href;
+      cta.textContent = target.cta;
+      cta.setAttribute("aria-label", target.cta);
+    }
+
+    if (note) note.textContent = target.note;
+    if (platformLabel) platformLabel.textContent = target.label;
+    if (platformChip) platformChip.textContent = target.chip;
+
+    const activeCard = document.querySelector(`[data-platform-card="${key}"]`);
+    if (activeCard) activeCard.classList.add("is-active");
+  </script>
+</BaseLayout>

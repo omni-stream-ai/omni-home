@@ -2,10 +2,10 @@ import type { APIRoute } from "astro";
 
 const pages = [
   "https://omnistreamai.com/",
-  "https://omnistreamai.com/voice",
-  "https://omnistreamai.com/ai-approval",
-  "https://omnistreamai.com/bridge",
-  "https://omnistreamai.com/download"
+  "https://omnistreamai.com/products/omni-code/voice",
+  "https://omnistreamai.com/products/omni-code/ai-approval",
+  "https://omnistreamai.com/products/omni-code/bridge",
+  "https://omnistreamai.com/products/omni-code/download"
 ];
 
 export const GET: APIRoute = () => {

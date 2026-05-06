@@ -1,6 +1,6 @@
 ---
-import TopicPage from "../components/TopicPage.astro";
-import { topicPages } from "../content/seo";
+import TopicPage from "../../../components/TopicPage.astro";
+import { topicPages } from "../../../content/seo";
 
 const page = topicPages.find((entry) => entry.slug === "voice");
 if (!page) {
