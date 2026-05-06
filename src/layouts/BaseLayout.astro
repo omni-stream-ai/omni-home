@@ -5,28 +5,29 @@ type Props = {
   title: string;
   description: string;
   jsonLd?: Record<string, unknown>;
+  ogImageAlt?: string;
+  themeColor?: string;
 };
 
-const { title, description, jsonLd } = Astro.props;
+const {
+  title,
+  description,
+  jsonLd,
+  ogImageAlt = "Omni Code by Omni Stream AI",
+  themeColor = "#f3efe7"
+} = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL("/og-cover.svg", Astro.site);
 const defaultJsonLd = {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "Omni Code",
-  applicationCategory: "DeveloperApplication",
-  operatingSystem: "Android, iOS, macOS, Windows, Linux",
+  "@type": "Organization",
+  name: "Omni Stream AI",
   url: "https://omnistreamai.com",
   description,
   sameAs: [
     "https://github.com/omni-stream-ai/omni-code",
     "https://github.com/omni-stream-ai/omni-code-bridge"
-  ],
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "USD"
-  }
+  ]
 };
 ---
 
@@ -36,6 +37,8 @@ const defaultJsonLd = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content={themeColor} />
+    <meta name="color-scheme" content="light" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -43,17 +46,31 @@ const defaultJsonLd = {
     <link rel="alternate icon" href="/favicon.png" type="image/png" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Omni Code" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Omni Stream AI" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={ogImageAlt} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
     <meta name="robots" content="index,follow,max-image-preview:large" />
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3FFP293F7"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-B3FFP293F7");
+    </script>
 
     <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd ?? defaultJsonLd)} />
   </head>
