@@ -2,6 +2,7 @@ import type { APIRoute } from "astro";
 
 const pages = [
   "https://omnistreamai.com/",
+  "https://omnistreamai.com/products/omni-code/web",
   "https://omnistreamai.com/products/omni-code/voice",
   "https://omnistreamai.com/products/omni-code/ai-approval",
   "https://omnistreamai.com/products/omni-code/bridge",

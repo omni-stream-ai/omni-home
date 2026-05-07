@@ -21,7 +21,7 @@ const softwareJsonLd = {
   "@type": "SoftwareApplication",
   name: "Omni Code",
   applicationCategory: "DeveloperApplication",
-  operatingSystem: "Android, macOS, Windows, Linux",
+  operatingSystem: "Android, macOS, Windows, Linux, Web",
   url: "https://omnistreamai.com/products/omni-code/download",
   downloadUrl: downloads.releases,
   description,
@@ -84,6 +84,9 @@ const softwareJsonLd = {
             >
               View latest releases
             </a>
+            <a class="button button-secondary" href="https://code.omnistreamai.com" target="_blank" rel="noreferrer">
+              Try Web
+            </a>
             <a class="button button-secondary" href={downloads.releases} target="_blank" rel="noreferrer">
               Open releases
             </a>
@@ -107,6 +110,11 @@ const softwareJsonLd = {
           </div>
 
           <div class="download-card-grid">
+            <a class="download-card" data-platform-card="web" href="https://code.omnistreamai.com" target="_blank" rel="noreferrer">
+              <span>Web</span>
+              <strong>PWA</strong>
+              <small>Open directly in your browser</small>
+            </a>
             <a class="download-card" data-platform-card="android" href={downloads.android}>
               <span>Android</span>
               <strong>Universal APK</strong>
@@ -197,6 +205,13 @@ const softwareJsonLd = {
 
   <script is:inline define:vars={{ downloads }}>
     const platformMap = {
+      web: {
+        label: "Web",
+        chip: "PWA",
+        href: "https://code.omnistreamai.com",
+        cta: "Open in Browser",
+        note: "Open Omni Code directly in your browser — no installation needed."
+      },
       android: {
         label: "Android",
         chip: "APK",
@@ -227,10 +242,10 @@ const softwareJsonLd = {
       },
       ios: {
         label: "iPhone / iPad",
-        chip: "Soon",
-        href: downloads.releases,
-        cta: "View desktop releases",
-        note: "An iOS build is not listed right now, so the button falls back to the full releases page."
+        chip: "Web",
+        href: "https://code.omnistreamai.com",
+        cta: "Open in Safari",
+        note: "An iOS build is not listed yet. Open the web app in Safari for a similar experience."
       },
       fallback: {
         label: "Release page",

@@ -1,0 +1,11 @@
+---
+import TopicPage from "../../../components/TopicPage.astro";
+import { topicPages } from "../../../content/seo";
+
+const page = topicPages.find((entry) => entry.slug === "web");
+if (!page) {
+  throw new Error("Web page content is missing.");
+}
+---
+
+<TopicPage page={page} />

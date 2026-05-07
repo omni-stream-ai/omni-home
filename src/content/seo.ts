@@ -1,5 +1,5 @@
 export type TopicPage = {
-  slug: "voice" | "ai-approval" | "bridge" | "download";
+  slug: "voice" | "ai-approval" | "bridge" | "download" | "web";
   title: string;
   description: string;
   eyebrow: string;
@@ -91,5 +91,31 @@ export const topicPages: TopicPage[] = [
     ],
     ctaLabel: "Open bridge repo",
     ctaHref: "https://github.com/omni-stream-ai/omni-code-bridge"
+  },
+  {
+    slug: "web",
+    title: "Omni Code Web App | Omni Stream AI",
+    description:
+      "Use Omni Code directly in your browser — no installation required. Full voice, approval, and bridge support from any device.",
+    eyebrow: "Web App",
+    headline: "Omni Code runs in the browser.",
+    intro:
+      "Access your desktop coding-agent sessions from any device with a browser. The web app delivers the same voice, approval, and bridge features as the native clients — no download needed.",
+    points: [
+      {
+        title: "No installation required",
+        body: "Open code.omnistreamai.com in any modern browser and start managing sessions immediately."
+      },
+      {
+        title: "Works on every platform",
+        body: "Use the same web app on Windows, macOS, Linux, ChromeOS, and mobile devices without separate builds."
+      },
+      {
+        title: "PWA support",
+        body: "Install the web app to your home screen for a native-like experience with offline capabilities."
+      }
+    ],
+    ctaLabel: "Open the web app",
+    ctaHref: "https://code.omnistreamai.com"
   },
 ];

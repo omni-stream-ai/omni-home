@@ -34,8 +34,8 @@ const homepageJsonLd = {
       "@id": "https://omnistreamai.com/#omnicode",
       name: "Omni Code",
       applicationCategory: "DeveloperApplication",
-      operatingSystem: "Android, macOS, Windows, Linux",
-      url: "https://omnistreamai.com",
+      operatingSystem: "Android, macOS, Windows, Linux, Web",
+      url: "https://code.omnistreamai.com",
       downloadUrl: "https://omnistreamai.com/products/omni-code/download",
       description,
       isAccessibleForFree: true,
@@ -43,7 +43,8 @@ const homepageJsonLd = {
         "Voice input and spoken replies",
         "AI-assisted approval with manual fallback",
         "Self-hosted bridge over HTTP and SSE",
-        "Brief replies through system-prompt compression"
+        "Brief replies through system-prompt compression",
+        "Web app accessible from any browser"
       ],
       sameAs: [
         "https://github.com/omni-stream-ai/omni-code",
@@ -95,7 +96,7 @@ const homepageJsonLd = {
             <span class="hero-pill">Omni Code</span>
             <span class="hero-pill">Voice-first</span>
             <span class="hero-pill">Human-in-loop</span>
-            <span class="hero-pill">Self-hostable</span>
+            <span class="hero-pill">Web + Native</span>
           </div>
           <h1>Control the agent from anywhere.</h1>
           <p class="hero-lead">
@@ -104,11 +105,14 @@ const homepageJsonLd = {
           </p>
 
           <div class="hero-actions">
-            <a class="button button-primary" href="/products/omni-code/download">
-              Download Omni Code
+            <a class="button button-primary" href="https://code.omnistreamai.com" target="_blank" rel="noreferrer">
+              Try Web
+            </a>
+            <a class="button button-secondary" href="/products/omni-code/download">
+              Download
             </a>
             <a class="button button-secondary" href="https://github.com/omni-stream-ai/omni-code" target="_blank" rel="noreferrer">
-              Open GitHub
+              GitHub
             </a>
           </div>
         </div>
@@ -310,6 +314,7 @@ const homepageJsonLd = {
     <footer class="footer">
       <p>Omni Code is the remote client for desktop coding-agent supervision.</p>
       <div class="footer-links">
+        <a href="https://code.omnistreamai.com" target="_blank" rel="noreferrer">Web App</a>
         <a href="https://github.com/omni-stream-ai/omni-code" target="_blank" rel="noreferrer">Client</a>
         <a href="https://github.com/omni-stream-ai/omni-code-bridge" target="_blank" rel="noreferrer">Bridge</a>
         <a href="https://github.com/omni-stream-ai/omni-code/releases" target="_blank" rel="noreferrer">Releases</a>
