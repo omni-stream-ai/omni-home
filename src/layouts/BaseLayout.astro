@@ -108,9 +108,6 @@ const defaultJsonLd = {
     <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd ?? defaultJsonLd)} />
   </head>
   <body>
-    <a class="lang-switch" href={switchHref} aria-label={locale === "zh" ? "Switch to English" : "切换到中文"}>
-      {switchLabel}
-    </a>
     <slot />
 
     {isHomepage && (

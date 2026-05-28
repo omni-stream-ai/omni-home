@@ -179,23 +179,19 @@ select {
 }
 
 .lang-switch {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 100;
   display: inline-flex;
   align-items: center;
-  min-height: 38px;
-  padding: 0 16px;
+  min-height: 34px;
+  padding: 0 12px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.72);
-  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  background: rgba(255, 255, 255, 0.62);
   backdrop-filter: blur(18px);
-  color: #3d4f5e;
+  color: #5a6976;
   font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.04em;
-  box-shadow: 0 8px 20px rgba(28, 42, 58, 0.08);
+  white-space: nowrap;
   transition:
     transform 180ms ease,
     border-color 180ms ease,
