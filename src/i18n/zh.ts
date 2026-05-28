@@ -13,7 +13,7 @@ export const content = {
 
   hero: {
     eyebrow: "本地编码代理的远程控制",
-    pills: ["Omni Code", "语音优先", "人在回路", "Web + 原生"],
+    pills: ["Omni Code", "语音优先", "人工介入", "Web + 原生"],
     headline: "随时随地控制代理。",
     lead:
       "Omni Code 让你可以与代理对话、审批敏感操作、听取回复，并将控制链路保持在你自己的桥接上。",
