@@ -10,7 +10,9 @@ const downloads = {
   repo: "https://github.com/omni-stream-ai/omni-code",
   bridge: "https://github.com/omni-stream-ai/omni-code-bridge",
   manifest: "https://github.com/omni-stream-ai/omni-code/releases/latest/download/update.json",
-  android: "https://github.com/omni-stream-ai/omni-code/releases/latest/download/omni-code-android.apk",
+  androidArm64: "https://github.com/omni-stream-ai/omni-code/releases/latest/download/omni-code-android-arm64-v8a.apk",
+  androidArm: "https://github.com/omni-stream-ai/omni-code/releases/latest/download/omni-code-android-armeabi-v7a.apk",
+  androidX86: "https://github.com/omni-stream-ai/omni-code/releases/latest/download/omni-code-android-x86_64.apk",
   macos: "https://github.com/omni-stream-ai/omni-code/releases/latest/download/omni-code-macos-unsigned.zip",
   windows: "https://github.com/omni-stream-ai/omni-code/releases/latest/download/omni-code-windows-x86_64.zip",
   linux: "https://github.com/omni-stream-ai/omni-code/releases/latest/download/omni-code-linux-x86_64.tar.gz"
@@ -115,15 +117,20 @@ const softwareJsonLd = {
               <strong>PWA</strong>
               <small>Open directly in your browser</small>
             </a>
-            <a class="download-card" data-platform-card="android" href={downloads.android}>
+            <a class="download-card" data-platform-card="android" href={downloads.androidArm64}>
               <span>Android</span>
-              <strong>Universal APK</strong>
-              <small>Direct latest download</small>
+              <strong>APK (arm64)</strong>
+              <small>Recommended for most devices</small>
             </a>
             <a class="download-card" data-platform-card="macos" href={downloads.macos}>
               <span>macOS</span>
               <strong>Unsigned ZIP</strong>
               <small>May require Gatekeeper override</small>
+            </a>
+            <a class="download-card" data-platform-card="macos-homebrew" href="#homebrew">
+              <span>macOS</span>
+              <strong>Homebrew</strong>
+              <small>brew install --cask omni-code</small>
             </a>
             <a class="download-card" data-platform-card="windows" href={downloads.windows}>
               <span>Windows</span>
@@ -134,6 +141,11 @@ const softwareJsonLd = {
               <span>Linux</span>
               <strong>x86_64 tar.gz</strong>
               <small>Direct latest download</small>
+            </a>
+            <a class="download-card" data-platform-card="linux-aur" href="#aur">
+              <span>Arch Linux</span>
+              <strong>AUR</strong>
+              <small>yay -S omni-code-bin</small>
             </a>
           </div>
         </aside>
@@ -151,20 +163,30 @@ const softwareJsonLd = {
       </div>
 
       <div class="feature-grid download-detail-grid">
-        <article class="feature-card">
-          <p class="feature-accent">Desktop</p>
-          <h3>Use GitHub latest-release asset links.</h3>
+        <article class="feature-card" id="homebrew">
+          <p class="feature-accent">macOS</p>
+          <h3>Install via Homebrew.</h3>
           <p>
-            macOS, Windows, and Linux can point straight at fixed asset names under the current
-            latest GitHub release instead of hardcoding a version tag.
+            macOS users with Homebrew can install Omni Code as a cask with automatic updates.
           </p>
+          <pre><code>brew tap omni-stream-ai/homebrew-omni-code
+brew install --cask omni-code</code></pre>
+        </article>
+
+        <article class="feature-card" id="aur">
+          <p class="feature-accent">Arch Linux</p>
+          <h3>Install from the AUR.</h3>
+          <p>
+            Arch Linux users can install the pre-built binary package from the AUR.
+          </p>
+          <pre><code>yay -S omni-code-bin</code></pre>
         </article>
 
         <article class="feature-card">
           <p class="feature-accent">Android</p>
-          <h3>Keep the APK path straightforward.</h3>
+          <h3>Pick the right architecture.</h3>
           <p>
-            The universal Android APK can use the same latest-release pattern, while the published
+            Separate APK builds are available for arm64, arm, and x86_64 devices. The
             <code>update.json</code> manifest remains available for client update flows.
           </p>
         </article>
@@ -215,9 +237,9 @@ const softwareJsonLd = {
       android: {
         label: "Android",
         chip: "APK",
-        href: downloads.android,
+        href: downloads.androidArm64,
         cta: "Download for Android",
-        note: "Direct latest universal APK from GitHub releases."
+        note: "Direct latest arm64 APK from GitHub releases."
       },
       macos: {
         label: "macOS",

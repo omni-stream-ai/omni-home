@@ -22,19 +22,23 @@ export const topicPages: TopicPage[] = [
     eyebrow: "Voice Control",
     headline: "A full voice loop for desktop coding agents.",
     intro:
-      "Use speech input, transcription, and spoken replies without staying pinned to the terminal. Voice is one of the core surfaces inside Omni Code.",
+      "Use speech input, transcription, and spoken replies without staying pinned to the terminal. Voice is one of the core surfaces inside Omni Code — now with local speech recognition and interruption support.",
     points: [
       {
         title: "Voice input when your hands are busy",
         body: "Send instructions through speech recognition instead of typing every message into the session."
       },
       {
-        title: "Auto-play AI replies",
-        body: "Have the client start playback automatically after the reply finishes so you can keep moving."
+        title: "Local speech recognition that works offline",
+        body: "Run speech-to-text on-device with sherpa-onnx so voice input stays available without a network connection and never leaves your machine."
       },
       {
-        title: "Speech-to-text and text-to-speech in one loop",
-        body: "The client supports both transcription and playback so the session can become a practical spoken workflow."
+        title: "Interrupt the AI mid-reply",
+        body: "Cut off a long or off-track response in call mode and redirect the conversation without waiting for it to finish."
+      },
+      {
+        title: "Auto-play AI replies",
+        body: "Have the client start playback automatically after the reply finishes so you can keep moving."
       }
     ],
     ctaLabel: "Explore the client",

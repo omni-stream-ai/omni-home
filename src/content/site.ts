@@ -33,7 +33,7 @@ export type FaqItem = {
 export const stats = [
   {
     value: "Voice-first",
-    label: "Speech input, spoken replies, and TTS are built into the product loop."
+    label: "Speech input, spoken replies, and TTS are built into the product loop. Local recognition runs on-device."
   },
   {
     value: "AI approval",
@@ -62,7 +62,7 @@ export const features: Feature[] = [
   },
   {
     title: "Run the loop by voice",
-    body: "Speech input, reply playback, and text-to-speech keep the workflow usable without staring at a terminal.",
+    body: "Speech input, reply playback, and text-to-speech keep the workflow usable without staring at a terminal. Local on-device recognition works offline and never leaves your machine.",
     accent: "Voice"
   },
   {
@@ -76,7 +76,7 @@ export const productStories: ProductStory[] = [
   {
     eyebrow: "Speak to the agent",
     title: "Voice becomes part of the default workflow.",
-    body: "Speech input, reply playback, and text-to-speech keep the session usable away from the keyboard.",
+    body: "Speech input, reply playback, and text-to-speech keep the session usable away from the keyboard. Local recognition runs on-device so it works offline and stays private.",
     ctaLabel: "Voice workflow",
     ctaHref: "/products/omni-code/voice",
     visual: "voice"
@@ -139,8 +139,8 @@ export const workflow: WorkflowStep[] = [
     label: "04",
     title: "Reply by text or voice",
     description: "Stay responsive even when your hands are busy or you are away from the keyboard.",
-    detail: "Speech-to-text, auto-play replies, and text-to-speech turn the client into a full voice surface for the agent loop.",
-    checkpoints: ["Voice input", "Auto-play replies", "Speech synthesis"]
+    detail: "Speech-to-text, auto-play replies, and text-to-speech turn the client into a full voice surface for the agent loop. Local on-device recognition works offline, and interruption support lets you cut off a response mid-sentence.",
+    checkpoints: ["Voice input", "Local ASR", "Interruption", "Auto-play replies"]
   }
 ];
 
@@ -155,7 +155,7 @@ export const faq: FaqItem[] = [
   },
   {
     question: "Does Omni Code support voice-first use?",
-    answer: "Yes. The client supports voice input, speech transcription, text-to-speech playback, and automatic spoken replies after the AI finishes."
+    answer: "Yes. The client supports voice input, speech transcription, text-to-speech playback, and automatic spoken replies after the AI finishes. Local on-device recognition with sherpa-onnx works offline and keeps your voice data private."
   },
   {
     question: "Can I make replies shorter?",
