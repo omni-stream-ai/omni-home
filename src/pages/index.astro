@@ -2,11 +2,10 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import WorkflowBoard from "../components/WorkflowBoard";
 import FaqAccordion from "../components/FaqAccordion";
-import { faq, features, productStories, stats, workflow } from "../content/site";
+import { getLocaleContent } from "../i18n";
 
-const title = "Omni Code | Remote Control for Desktop Coding Agents";
-const description =
-  "Omni Code is a remote client for desktop coding-agent sessions with voice control, approvals, brief replies, and a self-hosted bridge.";
+const t = getLocaleContent("en");
+
 const homepageJsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -25,9 +24,7 @@ const homepageJsonLd = {
       "@id": "https://omnistreamai.com/#website",
       url: "https://omnistreamai.com",
       name: "Omni Stream AI",
-      publisher: {
-        "@id": "https://omnistreamai.com/#organization"
-      }
+      publisher: { "@id": "https://omnistreamai.com/#organization" }
     },
     {
       "@type": "SoftwareApplication",
@@ -37,7 +34,7 @@ const homepageJsonLd = {
       operatingSystem: "Android, macOS, Windows, Linux, Web",
       url: "https://code.omnistreamai.com",
       downloadUrl: "https://omnistreamai.com/products/omni-code/download",
-      description,
+      description: t.meta.homeDescription,
       isAccessibleForFree: true,
       featureList: [
         "Voice input and spoken replies",
@@ -50,20 +47,14 @@ const homepageJsonLd = {
         "https://github.com/omni-stream-ai/omni-code",
         "https://github.com/omni-stream-ai/omni-code-bridge"
       ],
-      publisher: {
-        "@id": "https://omnistreamai.com/#organization"
-      },
-      offers: {
-        "@type": "Offer",
-        price: "0",
-        priceCurrency: "USD"
-      }
+      publisher: { "@id": "https://omnistreamai.com/#organization" },
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }
     }
   ]
 };
 ---
 
-<BaseLayout title={title} description={description} jsonLd={homepageJsonLd}>
+<BaseLayout title={t.meta.homeTitle} description={t.meta.homeDescription} jsonLd={homepageJsonLd}>
   <main class="site-shell">
     <section class="hero hero-home">
       <div class="hero-orb hero-orb-one" aria-hidden="true"></div>
@@ -81,38 +72,32 @@ const homepageJsonLd = {
         </a>
 
         <nav class="topnav" aria-label="Primary">
-          <a class="is-active" href="#product" aria-current="page">Omni Code</a>
+          <a class="is-active" href="#product" aria-current="page">{t.nav.omniCode}</a>
           <span class="topnav-future" aria-label="More products planned">
-            More products
-            <span class="topnav-badge">Future</span>
+            {t.nav.moreProducts}
+            <span class="topnav-badge">{t.nav.future}</span>
           </span>
         </nav>
       </header>
 
       <div class="hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">Remote control for local coding agents</p>
+          <p class="eyebrow">{t.hero.eyebrow}</p>
           <div class="hero-pill-row">
-            <span class="hero-pill">Omni Code</span>
-            <span class="hero-pill">Voice-first</span>
-            <span class="hero-pill">Human-in-loop</span>
-            <span class="hero-pill">Web + Native</span>
+            {t.hero.pills.map((pill) => <span class="hero-pill">{pill}</span>)}
           </div>
-          <h1>Control the agent from anywhere.</h1>
-          <p class="hero-lead">
-            Omni Code lets you speak to the agent, approve sensitive actions, hear replies back,
-            and keep the control path on a bridge you own.
-          </p>
+          <h1>{t.hero.headline}</h1>
+          <p class="hero-lead">{t.hero.lead}</p>
 
           <div class="hero-actions">
             <a class="button button-primary" href="https://code.omnistreamai.com" target="_blank" rel="noreferrer">
-              Try Web
+              {t.hero.ctaTryWeb}
             </a>
             <a class="button button-secondary" href="/products/omni-code/download">
-              Download
+              {t.hero.ctaDownload}
             </a>
             <a class="button button-secondary" href="https://github.com/omni-stream-ai/omni-code" target="_blank" rel="noreferrer">
-              GitHub
+              {t.hero.ctaGitHub}
             </a>
           </div>
         </div>
@@ -126,50 +111,35 @@ const homepageJsonLd = {
             <div class="launch-device">
               <div class="launch-device-top">
                 <span class="launch-dot"></span>
-                <span class="launch-device-label">Available now</span>
+                <span class="launch-device-label">{t.launch.availableNow}</span>
                 <span class="launch-chip">Omni Code</span>
               </div>
 
               <div class="launch-device-screen">
                 <div class="launch-panel launch-panel-voice">
                   <p class="launch-panel-label">Omni Code</p>
-                  <strong>Remote control for desktop coding agents</strong>
+                  <strong>{t.launch.remoteControl}</strong>
                   <div class="voice-wave" aria-hidden="true">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
                   </div>
-                  <p>Voice input, spoken replies, approvals, and bridge-based control in one client.</p>
+                  <p>{t.launch.voiceInput}</p>
                 </div>
 
                 <div class="launch-panel launch-panel-approval">
-                  <p class="launch-panel-label">Why it exists</p>
-                  <strong>Make remote supervision feel native instead of bolted on.</strong>
-                  <p>Keep the coding session on your own machine while giving the human better ways to hear, answer, and approve.</p>
+                  <p class="launch-panel-label">{t.launch.whyExists}</p>
+                  <strong>{t.launch.makeNative}</strong>
+                  <p>{t.launch.keepCoding}</p>
                   <div class="launch-pill-row">
-                    <span>Voice</span>
-                    <span>Approval</span>
-                    <span>Bridge</span>
+                    <span>{t.stories.visual.voiceSession.split(" ")[0]}</span>
+                    <span>{t.stories.items[1].eyebrow.split(" ").pop()}</span>
+                    <span>{t.stories.items[2].eyebrow.split(" ").pop()}</span>
                   </div>
                 </div>
 
                 <div class="launch-metrics">
-                  <article>
-                    <small>Transport</small>
-                    <strong>HTTP + SSE</strong>
-                  </article>
-                  <article>
-                    <small>Voice loop</small>
-                    <strong>STT / TTS</strong>
-                  </article>
-                  <article>
-                    <small>Replies</small>
-                    <strong>Brief mode</strong>
-                  </article>
+                  <article><small>{t.launch.transport}</small><strong>HTTP + SSE</strong></article>
+                  <article><small>{t.launch.voiceLoop}</small><strong>STT / TTS</strong></article>
+                  <article><small>{t.launch.replies}</small><strong>Brief mode</strong></article>
                 </div>
               </div>
             </div>
@@ -179,145 +149,115 @@ const homepageJsonLd = {
     </section>
 
     <section class="stat-strip">
-      {
-        stats.map((item) => (
-          <article class="stat-card">
-            <span class="stat-index">0{stats.indexOf(item) + 1}</span>
-            <strong>{item.value}</strong>
-            <p>{item.label}</p>
-          </article>
-        ))
-      }
+      {t.stats.map((item, i) => (
+        <article class="stat-card">
+          <span class="stat-index">0{i + 1}</span>
+          <strong>{item.value}</strong>
+          <p>{item.label}</p>
+        </article>
+      ))}
     </section>
 
     <section id="product" class="section section-story">
       <div class="section-heading">
-        <p class="eyebrow">Omni Code</p>
-        <h2>Voice, approvals, and bridge control in one client.</h2>
-        <p>
-          Omni Code wraps desktop coding-agent sessions in a cleaner remote control layer.
-        </p>
+        <p class="eyebrow">{t.stories.eyebrow}</p>
+        <h2>{t.stories.heading}</h2>
+        <p>{t.stories.intro}</p>
       </div>
 
       <div class="story-stack">
-        {
-          productStories.map((story, index) => (
-            <article class={`story-section ${index % 2 === 1 ? "story-section-reverse" : ""}`}>
-              <div class="story-copy">
-                <p class="eyebrow">{story.eyebrow}</p>
-                <h3>{story.title}</h3>
-                <p>{story.body}</p>
-                <a class="story-link" href={story.ctaHref}>{story.ctaLabel}</a>
-              </div>
+        {t.stories.items.map((story, index) => (
+          <article class={`story-section ${index % 2 === 1 ? "story-section-reverse" : ""}`}>
+            <div class="story-copy">
+              <p class="eyebrow">{story.eyebrow}</p>
+              <h3>{story.title}</h3>
+              <p>{story.body}</p>
+              <a class="story-link" href={story.ctaHref}>{story.ctaLabel}</a>
+            </div>
 
-              <div class={`story-visual story-visual-${story.visual}`} aria-hidden="true">
-                <div class="story-visual-card">
-                  {
-                    story.visual === "voice" && (
-                      <>
-                        <span class="story-visual-label">Voice session</span>
-                        <strong>Ask for the next change out loud.</strong>
-                        <div class="story-wave">
-                          <span></span>
-                          <span></span>
-                          <span></span>
-                          <span></span>
-                          <span></span>
-                          <span></span>
-                          <span></span>
-                          <span></span>
-                        </div>
-                      </>
-                    )
-                  }
-                  {
-                    story.visual === "approval" && (
-                      <>
-                        <span class="story-visual-label">Approval request</span>
-                        <strong>Pause before the risky step.</strong>
-                        <div class="story-action-row">
-                          <span>Approve</span>
-                          <span>Ask for context</span>
-                          <span>Deny</span>
-                        </div>
-                      </>
-                    )
-                  }
-                  {
-                    story.visual === "bridge" && (
-                      <>
-                        <span class="story-visual-label">Bridge status</span>
-                        <strong>Keep the control path close to your machine.</strong>
-                        <div class="story-metrics">
-                          {story.metricItems?.map((item) => (
-                            <div>
-                              <small>{item.label}</small>
-                              <strong>{item.value}</strong>
-                            </div>
-                          ))}
-                        </div>
-                      </>
-                    )
-                  }
-                </div>
+            <div class={`story-visual story-visual-${index === 0 ? "voice" : index === 1 ? "approval" : "bridge"}`} aria-hidden="true">
+              <div class="story-visual-card">
+                {index === 0 && (
+                  <>
+                    <span class="story-visual-label">{t.stories.visual.voiceSession}</span>
+                    <strong>{t.stories.visual.askForChange}</strong>
+                    <div class="story-wave">
+                      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                  </>
+                )}
+                {index === 1 && (
+                  <>
+                    <span class="story-visual-label">{t.stories.visual.approvalRequest}</span>
+                    <strong>{t.stories.visual.pauseBefore}</strong>
+                    <div class="story-action-row">
+                      <span>{t.stories.visual.approve}</span>
+                      <span>{t.stories.visual.askContext}</span>
+                      <span>{t.stories.visual.deny}</span>
+                    </div>
+                  </>
+                )}
+                {index === 2 && (
+                  <>
+                    <span class="story-visual-label">{t.stories.visual.bridgeStatus}</span>
+                    <strong>{t.stories.visual.keepPath}</strong>
+                    <div class="story-metrics">
+                      {story.metricItems?.map((item) => (
+                        <div><small>{item.label}</small><strong>{item.value}</strong></div>
+                      ))}
+                    </div>
+                  </>
+                )}
               </div>
-            </article>
-          ))
-        }
+            </div>
+          </article>
+        ))}
       </div>
     </section>
 
     <section class="section section-architecture">
       <div class="section-heading">
-        <p class="eyebrow">Core surface</p>
-        <h2>What the product actually covers.</h2>
-        <p>
-          Remote access, approval gates, voice, and a bridge you control.
-        </p>
+        <p class="eyebrow">{t.features.eyebrow}</p>
+        <h2>{t.features.heading}</h2>
+        <p>{t.features.intro}</p>
       </div>
 
       <div class="feature-grid feature-grid-compact">
-        {
-          features.map((feature) => (
-            <article class="feature-card">
-              <p class="feature-accent">{feature.accent}</p>
-              <h3>{feature.title}</h3>
-              <p>{feature.body}</p>
-              <span class="feature-arrow">Explore the product surface</span>
-            </article>
-          ))
-        }
+        {t.features.items.map((feature) => (
+          <article class="feature-card">
+            <p class="feature-accent">{feature.accent}</p>
+            <h3>{feature.title}</h3>
+            <p>{feature.body}</p>
+            <span class="feature-arrow">{t.features.exploreCta}</span>
+          </article>
+        ))}
       </div>
     </section>
 
     <section id="workflow" class="section section-workflow">
       <div class="section-heading">
-        <p class="eyebrow">Omni Code flow</p>
-        <h2>How Omni Code works in practice.</h2>
-        <p>
-          Attach to the bridge, resume the session, approve what matters, and answer by text or voice.
-        </p>
+        <p class="eyebrow">{t.workflow.eyebrow}</p>
+        <h2>{t.workflow.heading}</h2>
+        <p>{t.workflow.intro}</p>
       </div>
-
-      <WorkflowBoard steps={workflow} client:load />
+      <WorkflowBoard steps={t.workflow.steps} client:load />
     </section>
 
     <section id="faq" class="section section-faq">
       <div class="section-heading">
-        <p class="eyebrow">FAQ</p>
-        <h2>Common questions about Omni Code.</h2>
+        <p class="eyebrow">{t.faq.eyebrow}</p>
+        <h2>{t.faq.heading}</h2>
       </div>
-
-      <FaqAccordion items={faq} client:load />
+      <FaqAccordion items={t.faq.items} client:visible />
     </section>
 
     <footer class="footer">
-      <p>Omni Code is the remote client for desktop coding-agent supervision.</p>
+      <p>{t.footer.description}</p>
       <div class="footer-links">
-        <a href="https://code.omnistreamai.com" target="_blank" rel="noreferrer">Web App</a>
-        <a href="https://github.com/omni-stream-ai/omni-code" target="_blank" rel="noreferrer">Client</a>
-        <a href="https://github.com/omni-stream-ai/omni-code-bridge" target="_blank" rel="noreferrer">Bridge</a>
-        <a href="https://github.com/omni-stream-ai/omni-code/releases" target="_blank" rel="noreferrer">Releases</a>
+        <a href="https://code.omnistreamai.com" target="_blank" rel="noreferrer">{t.footer.webApp}</a>
+        <a href="https://github.com/omni-stream-ai/omni-code" target="_blank" rel="noreferrer">{t.footer.client}</a>
+        <a href="https://github.com/omni-stream-ai/omni-code-bridge" target="_blank" rel="noreferrer">{t.footer.bridge}</a>
+        <a href="https://github.com/omni-stream-ai/omni-code/releases" target="_blank" rel="noreferrer">{t.footer.releases}</a>
       </div>
     </footer>
   </main>

@@ -1,11 +1,5 @@
 ---
-import TopicPage from "../../../components/TopicPage.astro";
-import { topicPages } from "../../../content/seo";
-
-const page = topicPages.find((entry) => entry.slug === "ai-approval");
-if (!page) {
-  throw new Error("AI approval page content is missing.");
-}
+import LocalizedTopicPage from "../../../components/LocalizedTopicPage.astro";
 ---
 
-<TopicPage page={page} />
+<LocalizedTopicPage topicKey="aiApproval" locale="en" />
