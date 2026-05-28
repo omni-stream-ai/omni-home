@@ -1,0 +1,125 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getLocaleContent, localizeHref } from "../i18n";
+
+type Props = {
+  topicKey: "voice" | "aiApproval" | "bridge" | "web";
+  locale: string;
+};
+
+const { topicKey, locale } = Astro.props;
+const t = getLocaleContent(locale);
+const l = (href: string) => localizeHref(href, locale);
+
+const page = t.topics[topicKey];
+
+const softwareJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Omni Code",
+  applicationCategory: "DeveloperApplication",
+  operatingSystem: "Android, iOS, macOS, Windows, Linux, Web",
+  url: "https://omnistreamai.com",
+  description: page.description,
+  sameAs: [
+    "https://github.com/omni-stream-ai/omni-code",
+    "https://github.com/omni-stream-ai/omni-code-bridge"
+  ],
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }
+};
+---
+
+<BaseLayout title={page.title} description={page.description} jsonLd={softwareJsonLd}>
+  <main class="site-shell">
+    <section class="hero topic-hero">
+      <div class="hero-orb hero-orb-one" aria-hidden="true"></div>
+      <div class="hero-orb hero-orb-two" aria-hidden="true"></div>
+      <div class="hero-gridline" aria-hidden="true"></div>
+
+      <header class="topbar">
+        <a class="brand" href={l("/")}>
+          <span class="brand-mark">
+            <img src="/omni-code-logo.svg" alt="Omni Code logo" />
+          </span>
+          <span class="brand-copy">
+            <strong>Omni Stream AI</strong>
+            <small>omnistreamai.com</small>
+          </span>
+        </a>
+
+        <nav class="topnav" aria-label="Primary">
+          <a class="is-active" href={l("/")}>{t.topic.omniCode}</a>
+          <span class="topnav-future" aria-label="More products planned">
+            {t.nav.moreProducts}
+            <span class="topnav-badge">{t.nav.future}</span>
+          </span>
+        </nav>
+      </header>
+
+      <div class="topic-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">{page.eyebrow}</p>
+          <h1>{page.headline}</h1>
+          <p class="hero-lead">{page.intro}</p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href={page.ctaHref} target="_blank" rel="noreferrer">
+              {page.ctaLabel}
+            </a>
+            <a class="button button-secondary" href={l("/download")}>
+              {t.topic.downloadOmniCode}
+            </a>
+          </div>
+        </div>
+
+        <aside class="topic-panel">
+          <p class="mini-label">{t.topic.omniCode}</p>
+          <p class="topic-panel-title">{page.eyebrow}</p>
+          <p class="topic-panel-copy">
+            {t.topic.remoteSupervision}
+          </p>
+          <p class="mini-label">{t.topic.alsoExplore}</p>
+          <ul class="topic-links">
+            {t.topic.links.map((link) => (
+              <li><a href={l(link.href)}>{link.label}</a></li>
+            ))}
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">{t.topic.overview}</p>
+        <h2>{page.eyebrow} {t.topic.inOmniCode}</h2>
+        <p>{page.description}</p>
+      </div>
+
+      <div class="feature-grid">
+        {page.points.map((point) => (
+          <article class="feature-card">
+            <p class="feature-accent">{page.eyebrow}</p>
+            <h3>{point.title}</h3>
+            <p>{point.body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section section-cta">
+      <div class="cta-card">
+        <p class="eyebrow">{t.topic.nextStep}</p>
+        <h2>{t.topic.useFromSurface}</h2>
+        <p>{t.topic.startFromClient}</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="https://code.omnistreamai.com" target="_blank" rel="noreferrer">
+            {t.topic.tryWebApp}
+          </a>
+          <a class="button button-secondary" href={l("/download")}>
+            {t.topic.downloadPage}
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

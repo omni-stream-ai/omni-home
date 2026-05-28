@@ -1,0 +1,243 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getLocaleContent, localizeHref } from "../i18n";
+
+type Props = {
+  locale: string;
+};
+
+const { locale } = Astro.props;
+const t = getLocaleContent(locale);
+const l = (href: string) => localizeHref(href, locale);
+const dt = t.topics.download;
+
+const downloads = {
+  releases: "https://github.com/omni-stream-ai/omni-code/releases",
+  repo: "https://github.com/omni-stream-ai/omni-code",
+  bridge: "https://github.com/omni-stream-ai/omni-code-bridge",
+  manifest: "https://github.com/omni-stream-ai/omni-code/releases/latest/download/update.json",
+  androidArm64: "https://github.com/omni-stream-ai/omni-code/releases/latest/download/omni-code-android-arm64-v8a.apk",
+  androidArm: "https://github.com/omni-stream-ai/omni-code/releases/latest/download/omni-code-android-armeabi-v7a.apk",
+  androidX86: "https://github.com/omni-stream-ai/omni-code/releases/latest/download/omni-code-android-x86_64.apk",
+  macos: "https://github.com/omni-stream-ai/omni-code/releases/latest/download/omni-code-macos-unsigned.zip",
+  windows: "https://github.com/omni-stream-ai/omni-code/releases/latest/download/omni-code-windows-x86_64.zip",
+  linux: "https://github.com/omni-stream-ai/omni-code/releases/latest/download/omni-code-linux-x86_64.tar.gz"
+};
+
+const softwareJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Omni Code",
+  applicationCategory: "DeveloperApplication",
+  operatingSystem: "Android, macOS, Windows, Linux, Web",
+  url: "https://omnistreamai.com/products/omni-code/download",
+  downloadUrl: downloads.releases,
+  description: dt.description,
+  sameAs: [downloads.repo, downloads.bridge],
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }
+};
+
+const platformLabels = {
+  web: { label: dt.cards.web.label, chip: "PWA", cta: locale === "zh" ? "在浏览器中打开" : "Open in Browser", note: dt.cards.web.note },
+  android: { label: dt.cards.android.label, chip: "APK", cta: locale === "zh" ? "下载 Android 版" : "Download for Android", note: dt.cards.android.note },
+  macos: { label: dt.cards.macos.label, chip: "ZIP", cta: locale === "zh" ? "下载 macOS 版" : "Download for macOS", note: dt.cards.macos.note },
+  windows: { label: dt.cards.windows.label, chip: "ZIP", cta: locale === "zh" ? "下载 Windows 版" : "Download for Windows", note: dt.cards.windows.note },
+  linux: { label: dt.cards.linux.label, chip: "tar.gz", cta: locale === "zh" ? "下载 Linux 版" : "Download for Linux", note: dt.cards.linux.note },
+  ios: { label: "iPhone / iPad", chip: "Web", cta: locale === "zh" ? "在 Safari 中打开" : "Open in Safari", note: locale === "zh" ? "尚未提供 iOS 构建。在 Safari 中打开 Web 应用以获得类似体验。" : "An iOS build is not listed yet. Open the web app in Safari for a similar experience." },
+  fallback: { label: dt.releasePage, chip: dt.fallback, cta: dt.viewReleases, note: locale === "zh" ? "平台检测不可用，按钮回退到最新版本页面。" : "Platform detection is unavailable, so the button falls back to the latest releases page." }
+};
+---
+
+<BaseLayout title={dt.title} description={dt.description} jsonLd={softwareJsonLd}>
+  <main class="site-shell">
+    <section class="hero topic-hero download-hero">
+      <div class="hero-orb hero-orb-one" aria-hidden="true"></div>
+      <div class="hero-orb hero-orb-two" aria-hidden="true"></div>
+      <div class="hero-gridline" aria-hidden="true"></div>
+
+      <header class="topbar">
+        <a class="brand" href={l("/")}>
+          <span class="brand-mark">
+            <img src="/omni-code-logo.svg" alt="Omni Code logo" />
+          </span>
+          <span class="brand-copy">
+            <strong>Omni Stream AI</strong>
+            <small>omnistreamai.com</small>
+          </span>
+        </a>
+
+        <nav class="topnav" aria-label="Primary">
+          <a class="is-active" href={l("/")}>{t.topic.omniCode}</a>
+          <span class="topnav-future" aria-label="More products planned">
+            {t.nav.moreProducts}
+            <span class="topnav-badge">{t.nav.future}</span>
+          </span>
+        </nav>
+      </header>
+
+      <div class="download-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">{dt.eyebrow}</p>
+          <div class="hero-pill-row">
+            {dt.pills.map((pill) => <span class="hero-pill">{pill}</span>)}
+          </div>
+          <h1>{dt.headline}</h1>
+          <p class="hero-lead">{dt.lead}</p>
+
+          <div class="hero-actions">
+            <a id="download-cta" class="button button-primary" href={downloads.releases} data-default-label={dt.viewReleases}>
+              {dt.viewReleases}
+            </a>
+            <a class="button button-secondary" href="https://code.omnistreamai.com" target="_blank" rel="noreferrer">
+              {dt.tryWeb}
+            </a>
+            <a class="button button-secondary" href={downloads.releases} target="_blank" rel="noreferrer">
+              {dt.openReleases}
+            </a>
+          </div>
+
+          <p id="download-note" class="hero-note">{dt.platformNote}</p>
+        </div>
+
+        <aside class="download-panel">
+          <div class="download-panel-head">
+            <p class="mini-label">{dt.suggestedTarget}</p>
+            <div class="download-detected-row">
+              <strong id="download-platform-label">{dt.releasePage}</strong>
+              <span id="download-platform-chip" class="download-platform-chip">{dt.fallback}</span>
+            </div>
+            <p class="download-panel-copy">{dt.fallbackCopy}</p>
+          </div>
+
+          <div class="download-card-grid">
+            <a class="download-card" data-platform-card="web" href="https://code.omnistreamai.com" target="_blank" rel="noreferrer">
+              <span>{dt.cards.web.label}</span>
+              <strong>{dt.cards.web.title}</strong>
+              <small>{dt.cards.web.note}</small>
+            </a>
+            <a class="download-card" data-platform-card="android" href={downloads.androidArm64}>
+              <span>{dt.cards.android.label}</span>
+              <strong>{dt.cards.android.title}</strong>
+              <small>{dt.cards.android.note}</small>
+            </a>
+            <a class="download-card" data-platform-card="macos" href={downloads.macos}>
+              <span>{dt.cards.macos.label}</span>
+              <strong>{dt.cards.macos.title}</strong>
+              <small>{dt.cards.macos.note}</small>
+            </a>
+            <a class="download-card" data-platform-card="macos-homebrew" href="#homebrew">
+              <span>{dt.cards.homebrew.label}</span>
+              <strong>{dt.cards.homebrew.title}</strong>
+              <small>{dt.cards.homebrew.note}</small>
+            </a>
+            <a class="download-card" data-platform-card="windows" href={downloads.windows}>
+              <span>{dt.cards.windows.label}</span>
+              <strong>{dt.cards.windows.title}</strong>
+              <small>{dt.cards.windows.note}</small>
+            </a>
+            <a class="download-card" data-platform-card="linux" href={downloads.linux}>
+              <span>{dt.cards.linux.label}</span>
+              <strong>{dt.cards.linux.title}</strong>
+              <small>{dt.cards.linux.note}</small>
+            </a>
+            <a class="download-card" data-platform-card="linux-aur" href="#aur">
+              <span>{dt.cards.aur.label}</span>
+              <strong>{dt.cards.aur.title}</strong>
+              <small>{dt.cards.aur.note}</small>
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">{dt.releasePaths.eyebrow}</p>
+        <h2>{dt.releasePaths.heading}</h2>
+        <p>{dt.releasePaths.intro}</p>
+      </div>
+
+      <div class="feature-grid download-detail-grid">
+        <article class="feature-card" id="homebrew">
+          <p class="feature-accent">{dt.homebrew.accent}</p>
+          <h3>{dt.homebrew.heading}</h3>
+          <p>{dt.homebrew.body}</p>
+          <pre><code>brew tap omni-stream-ai/homebrew-omni-code
+brew install --cask omni-code</code></pre>
+        </article>
+
+        <article class="feature-card" id="aur">
+          <p class="feature-accent">{dt.aur.accent}</p>
+          <h3>{dt.aur.heading}</h3>
+          <p>{dt.aur.body}</p>
+          <pre><code>yay -S omni-code-bin</code></pre>
+        </article>
+
+        <article class="feature-card">
+          <p class="feature-accent">{dt.android.accent}</p>
+          <h3>{dt.android.heading}</h3>
+          <p>{dt.android.body}</p>
+        </article>
+
+        <article class="feature-card">
+          <p class="feature-accent">{dt.fallbackCard.accent}</p>
+          <h3>{dt.fallbackCard.heading}</h3>
+          <p>{dt.fallbackCard.body}</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-cta">
+      <div class="cta-card download-cta-card">
+        <p class="eyebrow">{dt.moreLinks.eyebrow}</p>
+        <h2>{dt.moreLinks.heading}</h2>
+        <p>{dt.moreLinks.body}</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href={downloads.repo} target="_blank" rel="noreferrer">
+            {dt.moreLinks.omniCodeRepo}
+          </a>
+          <a class="button button-secondary" href={downloads.bridge} target="_blank" rel="noreferrer">
+            {dt.moreLinks.bridgeRepo}
+          </a>
+          <a class="button button-secondary" href={downloads.manifest} target="_blank" rel="noreferrer">
+            {dt.moreLinks.androidManifest}
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline define:vars={{ downloads, platformLabels }}>
+    const detectPlatform = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const platform = (navigator.userAgentData?.platform || navigator.platform || "").toLowerCase();
+
+      if (userAgent.includes("android")) return "android";
+      if (/iphone|ipad|ipod/.test(userAgent)) return "ios";
+      if (platform.includes("mac") || userAgent.includes("mac os x")) return "macos";
+      if (platform.includes("win") || userAgent.includes("windows")) return "windows";
+      if (platform.includes("linux") || userAgent.includes("linux")) return "linux";
+      return "fallback";
+    };
+
+    const key = detectPlatform();
+    const target = platformLabels[key] || platformLabels.fallback;
+    const cta = document.getElementById("download-cta");
+    const note = document.getElementById("download-note");
+    const platformLabel = document.getElementById("download-platform-label");
+    const platformChip = document.getElementById("download-platform-chip");
+
+    if (cta instanceof HTMLAnchorElement) {
+      cta.href = downloads[key] || downloads.releases;
+      cta.textContent = target.cta;
+      cta.setAttribute("aria-label", target.cta);
+    }
+
+    if (note) note.textContent = target.note;
+    if (platformLabel) platformLabel.textContent = target.label;
+    if (platformChip) platformChip.textContent = target.chip;
+
+    const activeCard = document.querySelector(`[data-platform-card="${key}"]`);
+    if (activeCard) activeCard.classList.add("is-active");
+  </script>
+</BaseLayout>
