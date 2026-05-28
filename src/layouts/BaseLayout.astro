@@ -16,8 +16,22 @@ const {
   ogImageAlt = "Omni Code by Omni Stream AI",
   themeColor = "#f3efe7"
 } = Astro.props;
+
+const locale = Astro.locals.locale ?? "en";
+const lang = locale === "zh" ? "zh-CN" : "en";
+const ogLocale = locale === "zh" ? "zh_CN" : "en_US";
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL("/og-cover.svg", Astro.site);
+
+const pathname = Astro.url.pathname;
+const basePath = pathname.replace(/^\/zh/, "") || "/";
+const alternateEn = new URL(basePath, Astro.site);
+const alternateZh = new URL(`/zh${basePath === "/" ? "" : basePath}`, Astro.site);
+
+const switchLabel = locale === "zh" ? "EN" : "中文";
+const switchHref = locale === "zh" ? alternateEn.pathname : alternateZh.pathname;
+const isHomepage = pathname === "/" || pathname === "/zh/" || pathname === "/zh";
+
 const defaultJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -33,7 +47,7 @@ const defaultJsonLd = {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -46,8 +60,14 @@ const defaultJsonLd = {
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="alternate icon" href="/favicon.png" type="image/png" />
 
+    <link rel="alternate" hreflang="en" href={alternateEn} />
+    <link rel="alternate" hreflang="zh-CN" href={alternateZh} />
+    <link rel="alternate" hreflang="x-default" href={alternateEn} />
+
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content={ogLocale} />
+    {locale === "zh" && <meta property="og:locale:alternate" content="en_US" />}
+    {locale === "en" && <meta property="og:locale:alternate" content="zh_CN" />}
     <meta property="og:site_name" content="Omni Stream AI" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -62,20 +82,53 @@ const defaultJsonLd = {
     <meta name="twitter:image:alt" content={ogImageAlt} />
     <meta name="robots" content="index,follow,max-image-preview:large" />
 
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-B3FFP293F7"></script>
+    <link rel="preload" href="/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/cormorant-garamond-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
+      function gtag() { dataLayer.push(arguments); }
+      function loadGtag() {
+        if (window._gtagLoaded) return;
+        window._gtagLoaded = true;
+        var s = document.createElement("script");
+        s.src = "https://www.googletagmanager.com/gtag/js?id=G-B3FFP293F7";
+        s.async = true;
+        document.head.appendChild(s);
+        gtag("js", new Date());
+        gtag("config", "G-B3FFP293F7");
       }
-      gtag("js", new Date());
-
-      gtag("config", "G-B3FFP293F7");
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(loadGtag, { timeout: 3000 });
+      } else {
+        setTimeout(loadGtag, 3000);
+      }
     </script>
 
     <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd ?? defaultJsonLd)} />
   </head>
   <body>
+    <a class="lang-switch" href={switchHref} aria-label={locale === "zh" ? "Switch to English" : "切换到中文"}>
+      {switchLabel}
+    </a>
     <slot />
+
+    {isHomepage && (
+      <script is:inline define:vars={{ locale }}>
+        (function () {
+          if (sessionStorage.getItem("locale-redirected")) return;
+          var nav = navigator.language || "";
+          var wantZh = /^zh/i.test(nav);
+          var isEn = locale === "en";
+          if (wantZh && isEn) {
+            sessionStorage.setItem("locale-redirected", "1");
+            window.location.href = "/zh" + (location.pathname === "/" ? "" : location.pathname);
+          } else if (!wantZh && !isEn) {
+            sessionStorage.setItem("locale-redirected", "1");
+            window.location.href = location.pathname.replace(/^\/zh/, "") || "/";
+          }
+        })();
+      </script>
+    )}
   </body>
 </html>
