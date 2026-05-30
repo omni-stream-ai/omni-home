@@ -2417,6 +2417,27 @@ h3 {
   .lang-switch {
     backdrop-filter: none;
   }
+
+  .voice-wave span,
+  .story-wave span {
+    animation: none;
+  }
+
+  .launch-device {
+    animation: none;
+  }
+
+  .hero {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(249, 246, 240, 0.74));
+  }
+
+  .hero::before {
+    display: none;
+  }
+
+  .hero-gridline {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
