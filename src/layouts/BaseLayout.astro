@@ -30,7 +30,6 @@ const alternateZh = new URL(`/zh${basePath === "/" ? "" : basePath}`, Astro.site
 
 const switchLabel = locale === "zh" ? "EN" : "中文";
 const switchHref = locale === "zh" ? alternateEn.pathname : alternateZh.pathname;
-const isHomepage = pathname === "/" || pathname === "/zh/" || pathname === "/zh";
 
 const defaultJsonLd = {
   "@context": "https://schema.org",
@@ -110,22 +109,5 @@ const defaultJsonLd = {
   <body>
     <slot />
 
-    {isHomepage && (
-      <script is:inline define:vars={{ locale }}>
-        (function () {
-          if (sessionStorage.getItem("locale-redirected")) return;
-          var nav = navigator.language || "";
-          var wantZh = /^zh/i.test(nav);
-          var isEn = locale === "en";
-          if (wantZh && isEn) {
-            sessionStorage.setItem("locale-redirected", "1");
-            window.location.href = "/zh" + (location.pathname === "/" ? "" : location.pathname);
-          } else if (!wantZh && !isEn) {
-            sessionStorage.setItem("locale-redirected", "1");
-            window.location.href = location.pathname.replace(/^\/zh/, "") || "/";
-          }
-        })();
-      </script>
-    )}
   </body>
 </html>
