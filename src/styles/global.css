@@ -2397,6 +2397,28 @@ h3 {
   }
 }
 
+@media (max-width: 640px) {
+  .hero-orb,
+  .launch-orb,
+  .launch-device-glow {
+    display: none;
+  }
+
+  .feature-card,
+  .workflow-board,
+  .faq-item,
+  .story-visual-card,
+  .architecture-card,
+  .cta-card,
+  .compare-table {
+    backdrop-filter: none;
+  }
+
+  .lang-switch {
+    backdrop-filter: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
