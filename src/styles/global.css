@@ -2431,3 +2431,39 @@ h3 {
     transition: none !important;
   }
 }
+
+/* Firefox performance fix: Firefox handles backdrop-filter and large
+   filter:blur poorly compared to Chromium. Disable these effects
+   and use solid backgrounds as fallback. */
+@-moz-document url-prefix() {
+  .hero-orb {
+    filter: none;
+    opacity: 0.5;
+  }
+
+  .launch-orb,
+  .launch-device-glow {
+    filter: none;
+    opacity: 0.4;
+  }
+
+  .launch-device {
+    backdrop-filter: none;
+  }
+
+  .feature-card,
+  .workflow-board,
+  .faq-item,
+  .story-visual-card,
+  .architecture-card,
+  .cta-card,
+  .compare-table {
+    backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.85);
+  }
+
+  .lang-switch,
+  .topnav {
+    backdrop-filter: none;
+  }
+}
